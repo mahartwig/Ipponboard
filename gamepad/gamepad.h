@@ -7,6 +7,8 @@
 
 #pragma once
 
+#ifdef _WIN32
+
 #include <bitset>
 #include <cmath>
 #include <cassert>
@@ -594,5 +596,7 @@ private:
 };
 
 } //namespace FMlib
+
+#endif // _WIN32
 
 #endif  // FMLIB_GAMEPAD_H_

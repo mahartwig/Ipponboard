@@ -76,6 +76,7 @@ const QString GetSettingsFilePath(const char* fileName)
 #ifdef _WIN32
 	// (1) use file in common app data
 	// (2) create file or error
+	std::string filePath(fileName);
 
 	QString basePath = KnownFolders::get_LocalAppData();
 	QDir baseDir(basePath);
@@ -95,6 +96,7 @@ const QString GetSettingsFilePath(const char* fileName)
 #endif
 #endif
 }
+
 
 } // anonymous namespace
 } // namespace fmu

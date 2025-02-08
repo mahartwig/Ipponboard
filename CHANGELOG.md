@@ -12,7 +12,24 @@ For most recent changes see the project on github: [https://github.com/fmuecke/I
 
 ## Version 2.2-internal (2023-xx-yy)
 - (fix): consistenly named labels for categories and classes
-- (new): experimental support for Linux builds (no printing or gamepad so far)
+- (mod): WindowsXP is no longer supported!
+- (new): default fighter file can be saved and re-loaded directly from within fighter manager dialog
+- (fix): single tournament: fighter lists are reloaded after opening the fighter manager
+- (mod): simplified adding new fighters in the fighter manager
+  - use *del* key to remove and *ins* key to add
+- (new): fighter lists are stored in UTF-8 with byte-order-mark (so they can be opened and edited in Excel right away)
+- (new): current fighter list can opended with the default application for csv files (e.g. Excel)
+- (mod): removed customizable column layout for fighter import/export to simplify program code (single tournament)
+- (fix): Team Edition does not create `Fighter*.csv` any longer as it was not used
+- (new): fighter list is filtered by category in addition to the weight for the fighter combobox (single tournament)
+- (mod): spaces and underscores in fighter properties are trimmed and converted to simple spaces
+- (new): added fighter manager description to the manual (single tournament)
+- (new): added demo fighters `FighterList-Demo.csv`
+
+
+## Version 2.2 (2024-06-18)
+
+- (new): experimental support for Linux builds (no sound, printing or gamepad so far)
 - (mod): Updated InnoSetup installation engine to v6.x: --> Installer will not run with Windows Vista or unpatched Windows 7 anymore!
 - (mod): updated to Qt5 (Qt4 is out-of-support since May 2015) --> requires at least Windows Vista to run
 - (internal) switched internal build system to CMAKE for better compatibility regarding different build environments
@@ -23,9 +40,6 @@ For most recent changes see the project on github: [https://github.com/fmuecke/I
 - (new): tournament mode can be selected via command line switch (skips splash screen)
   - "--mode team" directly starts team tournament mode
   - "--mode single" directly starts in single tournament mode
-- (fix): single tournament: fighter lists are reloaded after opening the fighter manager
-- (mod): simplified adding new fighters in the fighter manager (TODO merge branch)
-  - use *del* key to remove and *ins* key to add
 
 ## Version 2.0 (2021-01-10; 3158e7af7289af1e8bbb30cf8a8e919cdaf6e507)
 

@@ -32,12 +32,16 @@ endif()
 set(SOURCES
     IpponboardTest.cpp
     TestFight.cpp
+	TestFighter.cpp
+	TestFighterManager.cpp
     TestJson.cpp
+    TestOnlineVersionChecker.cpp
+	Test-path_helpers.cpp
+	TestQStringHelper.cpp
     TestRules.cpp
     TestScore.cpp
+	TestSimpleCsvFile.cpp
     TestTournamentMode.cpp
-    TestOnlineVersionChecker.cpp
-    Test-path_helpers.cpp
     TestVersionComparer.cpp
 )
 

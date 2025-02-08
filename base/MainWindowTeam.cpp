@@ -328,8 +328,7 @@ void MainWindowTeam::read_specific_settings(QSettings& settings)
 void MainWindowTeam::on_actionManageFighters_triggered()
 {
 	MainWindowBase::on_actionManageFighters_triggered();
-
-	FighterManagerDlg dlg(m_fighterManager, this);
+    FighterManagerDlg dlg(m_fighterManager, this);
 	dlg.exec();
 }
 

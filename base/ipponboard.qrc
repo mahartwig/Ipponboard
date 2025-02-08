@@ -52,6 +52,7 @@
         <file>icons/save.png</file>
         <file>icons/options.png</file>
         <file>images/btn_donate_EN_s.png</file>
+        <file>icons/arrow-circle.png</file>
     </qresource>
     <qresource prefix="/leagues">
         <file>emblems/bjv-logo.png</file>

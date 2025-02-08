@@ -24,12 +24,10 @@ FightCategoryManagerDlg::FightCategoryManagerDlg(
 
 	// NOTE: This is nasty workaround for the standard buttons not
 	// beeing translated (separate translator would be required)
-	ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Ok"));
-	ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
+	//ui->buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Ok"));
+	//ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
 
 	Q_ASSERT(m_pClassMgr);
-
-	m_originalClasses = m_pClassMgr->ConvertCategoriesToString_WITH_GUI_ERROR();
 
 	load_values();
 }
@@ -74,7 +72,7 @@ void FightCategoryManagerDlg::on_pushButton_add_pressed()
 	{
 		QMessageBox::critical(this,
 							  tr(""),
-							  tr("This category already exists. Please choose an other name."));
+							  tr("This category already exists. Please choose a different name."));
 
 		name = QInputDialog::getText(this,
 									 tr("Add new category"),
@@ -87,6 +85,7 @@ void FightCategoryManagerDlg::on_pushButton_add_pressed()
 	if (ok)
 	{
 		m_pClassMgr->AddCategory(name);
+		isModifiedData = true;
 
 		// update combobox
 		QStringList contents;
@@ -127,24 +126,6 @@ void FightCategoryManagerDlg::load_values()
 }
 
 //---------------------------------------------------------
-void FightCategoryManagerDlg::on_buttonBox_accepted()
-//---------------------------------------------------------
-{
-	// do not restore old values
-	//TODO: ? accept();
-}
-
-//---------------------------------------------------------
-void FightCategoryManagerDlg::on_buttonBox_rejected()
-//---------------------------------------------------------
-{
-	// restore old values
-	//TODO: ? reject();
-
-	m_pClassMgr->CategoriesFromString(m_originalClasses);
-}
-
-//---------------------------------------------------------
 void FightCategoryManagerDlg::on_pushButton_remove_pressed()
 //---------------------------------------------------------
 {
@@ -156,6 +137,7 @@ void FightCategoryManagerDlg::on_pushButton_remove_pressed()
 			ui->treeWidget_classes->indexOfTopLevelItem(pItem));
 
 		m_pClassMgr->RemoveCategory(pItem->text(eColumn_Name));
+		isModifiedData = true;
 
 		delete pItem;
 	}
@@ -218,6 +200,7 @@ void FightCategoryManagerDlg::on_treeWidget_classes_itemChanged(
 		}
 
 		m_pClassMgr->RenameCategory(old.ToString(), cat.ToString());
+		isModifiedData = true;
 		return;
 	}
 	else if (eColumn_Time == column)
@@ -242,6 +225,7 @@ void FightCategoryManagerDlg::on_treeWidget_classes_itemChanged(
 	{
 		brush.setColor(Qt::black);
 		m_pClassMgr->UpdateCategory(cat);
+		isModifiedData = true;
 	}
 	else
 	{
@@ -249,4 +233,20 @@ void FightCategoryManagerDlg::on_treeWidget_classes_itemChanged(
 	}
 
 	pItem->setForeground(column, brush);
+}
+
+void FightCategoryManagerDlg::close_dialog()
+{
+	if (isModifiedData) QDialog::accept();
+	else QDialog::reject();
+}
+
+void FightCategoryManagerDlg::reject()
+{
+	close_dialog();
+}
+
+void FightCategoryManagerDlg::accept()
+{
+	close_dialog();
 }

@@ -27,7 +27,7 @@ public:
 	enum EColumn
 	{
 		eColumn_club = 0,
-		//eColumn_category,
+		eColumn_category,
 		eColumn_firstName,
 		eColumn_lastName,
 		eColumn_weight,
@@ -36,7 +36,7 @@ public:
 
 	explicit FighterManagerDlg(
 		Ipponboard::FighterManager& manager,
-		QWidget* parent = nullptr);
+        QWidget* parent = nullptr);
 
 	virtual ~FighterManagerDlg();
 
@@ -55,16 +55,19 @@ private slots:
 	//void on_buttonBox_accepted();
 	void on_pushButton_remove_pressed();
 	void on_pushButton_add_pressed();
-	void on_pushButton_settings_pressed();
+    void on_toolButton_openFile_pressed();
+    void on_toolButton_reload_pressed();
+    void on_toolButton_save_pressed();
 
 private:
 	void populate_view();
+	Ipponboard::Fighter itemToFighter(QTreeWidgetItem* pItem) const;
+	QStringList fighterToItemData(Ipponboard::Fighter) const;
 
 	Ui::FighterManagerDlg* ui;
 	Ipponboard::FighterManager& m_manager;
-	QString m_tmpData;
+	QString m_currentCellData;
 	std::pair<EColumn, QString> m_filter;
-	QString m_formatStr;
 };
 
 #endif // BASE_FIGHTERMANAGERDLG_H

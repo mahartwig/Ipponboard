@@ -109,7 +109,7 @@ QString MainWindowBase::GetConfigFileName() const
 
 QString MainWindowBase::GetFighterFileName() const
 {
-	return QString("Fighters%1.csv").arg(EditionNameShort());
+	return QString("FighterList-%1.csv").arg(EditionNameShort());
 }
 
 void MainWindowBase::UpdateView()
@@ -675,33 +675,26 @@ void MainWindowBase::load_fighters()
 	QString csvFile(fm::GetSettingsFilePath(GetFighterFileName().toLatin1()));
 
 	QString errorMsg;
+	m_fighterManager.defaultCsvFile = csvFile;
 
-	if (!QFile::exists(csvFile))
+    	if (!m_fighterManager.LoadFighters(m_fighterManager.defaultCsvFile, errorMsg))
 	{
-		// silently ignore
-		return;
-	}
-
-	if (!m_fighterManager.ImportFighters(csvFile, FighterManager::DefaultExportFormat(), errorMsg))
-	{
-		QMessageBox::critical(
-			this,
-			QCoreApplication::applicationName(),
-			errorMsg);
+		// only show error, if file did exist
+		// -> ensures proper default file creating and handling
+		if (QFile::exists(csvFile))
+		{
+			QMessageBox::critical(this, QCoreApplication::applicationName(), errorMsg);
+		}
 	}
 }
 
 void MainWindowBase::save_fighters()
 {
-	QString csvFile(fm::GetSettingsFilePath(GetFighterFileName().toLatin1()));
+	//QString csvFile(fm::GetSettingsFilePath(GetFighterFileName().toLatin1()));
 	QString errorMsg;
-
-	if (!m_fighterManager.ExportFighters(csvFile, FighterManager::DefaultExportFormat(), errorMsg))
+	if (!m_fighterManager.SaveFighters(m_fighterManager.defaultCsvFile, errorMsg))
 	{
-		QMessageBox::critical(
-			this,
-			QCoreApplication::applicationName(),
-			errorMsg);
+		QMessageBox::critical(this, QCoreApplication::applicationName(), errorMsg);
 	}
 }
 
@@ -808,7 +801,7 @@ void MainWindowBase::show_hide_view() const
 
 	if (m_pSecondaryView->isHidden())
 	{
-        update_screen_visibility(m_pSecondaryView.get());
+       		update_screen_visibility(m_pSecondaryView.get());
 	}
 	else
 	{
@@ -1014,9 +1007,7 @@ void MainWindowBase::on_button_reset_clicked()
 //							   tr("Really reset current fight?"),
 //							   QMessageBox::No | QMessageBox::Yes );
 //	if( QMessageBox::Yes == answer )
-	m_pController->DoAction(eAction_ResetAll,
-                        FighterEnum::Nobody,
-							false);
+	m_pController->DoAction(eAction_ResetAll, FighterEnum::Nobody, false);
 }
 
 void MainWindowBase::on_action_Info_Header_triggered(bool val)

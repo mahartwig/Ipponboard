@@ -23,6 +23,8 @@ public:
 	FighterManager(const FighterManager&) = delete;
     FighterManager& operator=(const FighterManager&) = delete;
 
+	using FighterList = std::set<Ipponboard::Fighter>;
+
 	static char const* const str_FIRSTNAME;
 	static char const* const str_LASTNAME;
 	static char const* const str_CLUB;
@@ -31,24 +33,32 @@ public:
 
 	static const std::array<char const* const, 5> Specifiers;
 
-	static QString GetSpecifierDescription();
-	//static bool IsValidSpecifier(QString const& str);
-	static bool IsFormatSatisfying(QString const& formatStr);
-	static bool DetermineSeparator(QString const& str, QString& sep);
+	static QStringList GetCsvHeader(); // returns all specifiers separated by Separator
 
-	static QString DefaultExportFormat();
+    QString defaultCsvFile;
 
-	bool ImportFighters(QString const& fileName, QString const& formatStr, QString& errorMsg);
-	bool ExportFighters(QString const& fileName, QString const& formatStr, QString& errorMsg);
+	bool Contains(Ipponboard::Fighter const& f) const;
 
+	// clears fighter list and imports them from a csv-file
+	bool LoadFighters(QString const& csvFile, QString& errorMsg);
+
+	// imports fighters from a csv-file
+	bool AddFighters(QString const& csvFile, QString& errorMsg);
+
+	// saves all fighters to a csv-file
+	bool SaveFighters(QString const& csvFile, QString& errorMsg);
+
+	Ipponboard::Fighter AddNewFighter();
 	bool AddFighter(Ipponboard::Fighter f);
 	bool RemoveFighter(Ipponboard::Fighter f);
 	QStringList GetClubFighterNames(QString const& filter) const;
 
-//private:
-	std::set<Ipponboard::Fighter> m_fighters; //TODO: encapsulate
-private:
+	static FighterList Filter(FighterList const& fighters, QString const& specifier, QString const& value);
 
+//private:
+	FighterList m_fighters; //TODO: encapsulate
+private:
+    static char const* const str_Separator;
 };
 
 }  // namespace Ipponboard

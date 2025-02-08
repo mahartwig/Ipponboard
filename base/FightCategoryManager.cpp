@@ -5,13 +5,16 @@
 #include "FightCategoryManager.h"
 
 #include <QObject>
+
 #include <QMessageBox>
 #include <QFile>
 
 #include "../util/path_helpers.h"
 #include "FightCategoryParser.h"
 
-#include <stdexcept>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include <algorithm>
 
 using namespace Ipponboard;
@@ -41,7 +44,7 @@ bool FightCategoryMgr::GetCategory(int index,
 {
 	try
 	{
-        t = m_Categories.at(static_cast<size_t>(index));
+        	t = m_Categories.at(static_cast<size_t>(index));
 	}
 	catch (std::out_of_range&)
 	{
@@ -171,7 +174,7 @@ void FightCategoryMgr::load_categories()
 	}
 	catch (std::exception const& e)
 	{
-        QMessageBox::critical(nullptr,
+		QMessageBox::critical(nullptr,
 							  QString(QObject::tr("Error")),
 							  QString(QObject::tr("Unable to load fight categories:\n%1\n\nRestoring defaults.").arg(
 										  QString::fromStdString(e.what()))));
@@ -189,45 +192,37 @@ void FightCategoryMgr::save_categories()
 }
 
 //---------------------------------------------------------
-bool FightCategoryMgr::CategoriesFromString(std::string const& s)
+void FightCategoryMgr::CategoriesFromString_UNUSED(std::string const& s) // throws std::exception
 //---------------------------------------------------------
 {
 	try
 	{
 		auto cats = FightCategoryParser::ParseJsonString(s);
-
+		throw std::runtime_error("fromString failed");
+		m_Categories.clear();
 		for (auto const & cat : cats)
 		{
 			AddCategory(cat);
 		}
 	}
-	catch (std::exception const& e)
+	catch (std::runtime_error const&)
 	{
-        QMessageBox::critical(nullptr,
-							  QString(QObject::tr("Error")),
-							  QString(QObject::tr("Unable to parse fight categories:\n%1\n\nRestoring defaults.").arg(
-										  QString::fromStdString(e.what()))));
-
-		return false;
+		throw; // re-throw
 	}
-
-	return true;
 }
 
 //---------------------------------------------------------
-std::string FightCategoryMgr::ConvertCategoriesToString_WITH_GUI_ERROR()
+std::string FightCategoryMgr::CategoriesToString_UNUSED() // throws std::exception
 //---------------------------------------------------------
 {
 	try
 	{
+		throw std::runtime_error("toString failed");
 		return FightCategoryParser::ToJsonString(m_Categories);
 	}
-	catch (std::exception const& e)
+	catch (std::runtime_error const&)
 	{
-        QMessageBox::critical(nullptr,
-							  QString(QObject::tr("Error")),
-							  QString(QObject::tr("Unable to write fight categories:\n%1").arg(
-										  QString::fromStdString(e.what()))));
+		throw; // re-throw
 	}
 
 	return std::string();

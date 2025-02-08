@@ -32,8 +32,6 @@ endif()
 set(SOURCES
     #pch.cpp
     #pch.h
-    AddFighterDlg.cpp
-    AddFighterDlg.h
     Club.h
     ClubManager.cpp
     ClubManager.h
@@ -116,7 +114,6 @@ set(SOURCES
 )
 
 set(FORMS
-    AddFighterDlg.ui
     ClubManagerDlg.ui
     FighterManagerDlg.ui
     FightCategoryManagerDlg.ui

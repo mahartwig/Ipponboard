@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
-    <height>405</height>
+    <width>802</width>
+    <height>502</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,13 +23,117 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,1,0,0">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Live Edit&lt;/span&gt;: All changes are immediate! They may trigger reloading of the score board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QLabel" name="label_filterinfo">
      <property name="text">
       <string/>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="pushButton_import">
+       <property name="toolTip">
+        <string>Import fighters</string>
+       </property>
+       <property name="text">
+        <string>&amp;Import list</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ipponboard.qrc">
+         <normaloff>:/res/icons/import_list.png</normaloff>:/res/icons/import_list.png</iconset>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_export">
+       <property name="toolTip">
+        <string>Export fighters</string>
+       </property>
+       <property name="text">
+        <string>E&amp;xport list</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ipponboard.qrc">
+         <normaloff>:/res/icons/export_list.png</normaloff>:/res/icons/export_list.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_add">
+       <property name="toolTip">
+        <string>Add a new fighter</string>
+       </property>
+       <property name="text">
+        <string>&amp;Add new</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ipponboard.qrc">
+         <normaloff>:/res/icons/add.png</normaloff>:/res/icons/add.png</iconset>
+       </property>
+       <property name="shortcut">
+        <string>Ins</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_remove">
+       <property name="toolTip">
+        <string>Remove the currently selected weight class</string>
+       </property>
+       <property name="text">
+        <string>&amp;Remove selection</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ipponboard.qrc">
+         <normaloff>:/res/icons/delete.png</normaloff>:/res/icons/delete.png</iconset>
+       </property>
+       <property name="shortcut">
+        <string>Del</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QTreeWidget" name="treeWidget_fighters">
@@ -74,72 +178,32 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <property name="rightMargin">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="topMargin">
       <number>0</number>
      </property>
      <item>
-      <widget class="QPushButton" name="pushButton_import">
-       <property name="toolTip">
-        <string>Import fighters</string>
-       </property>
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>&amp;Import</string>
-       </property>
-       <property name="icon">
-        <iconset resource="ipponboard.qrc">
-         <normaloff>:/res/icons/import_list.png</normaloff>:/res/icons/import_list.png</iconset>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
+        <string>Current list: </string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_export">
-       <property name="toolTip">
-        <string>Export fighters</string>
+      <widget class="QLabel" name="label_FighterFile">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
-        <string>E&amp;xport</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Default-FighterFile.csv&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
-       <property name="icon">
-        <iconset resource="ipponboard.qrc">
-         <normaloff>:/res/icons/export_list.png</normaloff>:/res/icons/export_list.png</iconset>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_settings">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="toolTip">
-        <string>Settings for import/export</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="ipponboard.qrc">
-         <normaloff>:/res/icons/settings.png</normaloff>:/res/icons/settings.png</iconset>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -151,42 +215,106 @@
        </property>
       </spacer>
      </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
      <item>
-      <widget class="QPushButton" name="pushButton_add">
-       <property name="toolTip">
-        <string>Add a new fighter</string>
+      <widget class="QToolButton" name="toolButton_save">
+       <property name="statusTip">
+        <string>save fighters to file</string>
        </property>
        <property name="text">
-        <string>&amp;Add</string>
+        <string>Save</string>
        </property>
        <property name="icon">
         <iconset resource="ipponboard.qrc">
-         <normaloff>:/res/icons/add.png</normaloff>:/res/icons/add.png</iconset>
+         <normaloff>:/res/icons/save.png</normaloff>:/res/icons/save.png</iconset>
        </property>
-       <property name="autoDefault">
+       <property name="popupMode">
+        <enum>QToolButton::DelayedPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+       <property name="autoRaise">
         <bool>true</bool>
        </property>
-       <property name="default">
-        <bool>true</bool>
+       <property name="arrowType">
+        <enum>Qt::NoArrow</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_remove">
-       <property name="toolTip">
-        <string>Remove the currently selected weight class</string>
+      <widget class="QToolButton" name="toolButton_openFile">
+       <property name="statusTip">
+        <string>Open the file with the default application</string>
        </property>
        <property name="text">
-        <string>&amp;Remove</string>
+        <string notr="true">Open with app</string>
        </property>
        <property name="icon">
         <iconset resource="ipponboard.qrc">
-         <normaloff>:/res/icons/delete.png</normaloff>:/res/icons/delete.png</iconset>
+         <normaloff>:/res/icons/right.png</normaloff>:/res/icons/right.png</iconset>
        </property>
-       <property name="autoDefault">
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::DelayedPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+       <property name="autoRaise">
         <bool>true</bool>
        </property>
+       <property name="arrowType">
+        <enum>Qt::NoArrow</enum>
+       </property>
       </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_reload">
+       <property name="statusTip">
+        <string>re-load fighters from file</string>
+       </property>
+       <property name="text">
+        <string notr="true">Re-load</string>
+       </property>
+       <property name="icon">
+        <iconset resource="ipponboard.qrc">
+         <normaloff>:/res/icons/arrow-circle.png</normaloff>:/res/icons/arrow-circle.png</iconset>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::DelayedPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+       <property name="arrowType">
+        <enum>Qt::NoArrow</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

@@ -6,6 +6,7 @@
 #define FIGHTER_H
 
 #include <QString>
+#include "../util/qstring_helper.h"
 
 namespace Ipponboard
 {
@@ -24,6 +25,34 @@ public:
 				club == other.club &&
 				weight == other.weight &&
 				category == other.category);
+	}
+
+	inline Fighter GetNormalized() const
+	{
+		Fighter f(fm::NormalizeSpaces(first_name), fm::NormalizeSpaces(last_name));
+		f.club = fm::NormalizeSpaces(club);
+		f.weight = fm::NormalizeSpaces(weight);
+		f.category = fm::NormalizeSpaces(category);
+
+		return f;
+	}
+
+	// ignores weight or category if empty
+	inline bool Matches(Fighter const& other) const
+	{
+		if (this == &other) return true;
+		auto lhs = GetNormalized();
+		auto rhs = other.GetNormalized();
+		return (lhs.first_name == other.first_name &&
+				lhs.last_name == other.last_name &&
+				(lhs.club == rhs.club || club.isEmpty() || other.club.isEmpty()) &&
+				(lhs.weight == rhs.weight || weight.isEmpty() || other.weight.isEmpty()) &&
+				(lhs.category == rhs.category || category.isEmpty() || other.category.isEmpty()));
+	}
+
+	inline bool operator!=(Fighter const& other) const
+	{
+		return !(*this==other);
 	}
 
 	inline bool operator<(Fighter const& other) const
