@@ -19,7 +19,7 @@
 
 using namespace Ipponboard;
 
-const char* const FightCategoryMgr::str_fileName = "categories.json";
+const char* const FightCategoryMgr::str_legacyConfigFileName = "categories.json"; // used prior to version 1.10
 const char* const FightCategoryMgr::str_configFileName = "categories.config";
 
 //---------------------------------------------------------
@@ -152,7 +152,7 @@ void FightCategoryMgr::load_categories()
 //---------------------------------------------------------
 {
 	auto configFile {fm::GetSettingsFilePath(str_configFileName)};
-	auto legacyFile {fm::GetSettingsFilePath(str_fileName)};
+	auto legacyFile {fm::GetSettingsFilePath(str_legacyConfigFileName)};
 
 	try
 	{

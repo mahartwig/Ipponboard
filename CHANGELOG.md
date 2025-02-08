@@ -2,7 +2,15 @@
 
 For most recent changes see the project on github: [https://github.com/fmuecke/Ipponboard](https://github.com/fmuecke/Ipponboard)
 
-## Version 2.x (2023-xx-yy)
+- (mod): added and updated TournamentModes to current weight and age classes
+- (fix): tournament mode data were overwritten when switching through the modes
+- (new): eight new mat signal sounds (applause, bell, boxing-bell, clapping, gong, horn, metal-bowl, the-end)
+
+## Version 2.3-experimental (2025-01-19)
+- (new): added IJF-2025 rules which re-introduced yuko
+- (mod): usign IJF-2025 rules for per default
+
+## Version 2.2-internal (2023-xx-yy)
 - (fix): consistenly named labels for categories and classes
 - (mod): WindowsXP is no longer supported!
 - (new): default fighter file can be saved and re-loaded directly from within fighter manager dialog
