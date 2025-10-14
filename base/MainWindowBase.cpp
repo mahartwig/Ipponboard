@@ -778,21 +778,22 @@ void MainWindowBase::on_actionPreferences_triggered()
 void MainWindowBase::update_screen_visibility(QWidget* pView) const
 {
     const auto nScreens = QGuiApplication::screens().size();
-    if (nScreens > 0 && nScreens > m_secondScreenNo)
-    {
-        auto screenRes = QGuiApplication::screens().at(m_secondScreenNo)->geometry();
-        pView->move(QPoint(screenRes.x(), screenRes.y()));
-    }
-
-    if (m_secondScreenSize.isNull())
-    {
-		pView->showFullScreen();
-    }
-    else
-    {
-		pView->resize(m_secondScreenSize);
-		pView->show();
-    }
+	if (nScreens > 0 && nScreens > m_secondScreenNo)
+	{
+		auto screenRes = QGuiApplication::screens().at(m_secondScreenNo)->geometry();
+		
+		// for some reason only using setGeometry after showFullScreen will always display the secondary windows correctly, could be a Qt5 thing
+		if (m_secondScreenSize.isNull())
+		{
+			pView->showFullScreen();
+			pView->setGeometry(screenRes);
+		}
+		else
+		{
+			pView->showFullScreen();
+			pView->setGeometry(screenRes.x(), screenRes.y(), m_secondScreenSize.width(), m_secondScreenSize.height());
+		}
+	}
 }
 
 void MainWindowBase::show_hide_view() const

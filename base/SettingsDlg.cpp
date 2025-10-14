@@ -106,7 +106,7 @@ SettingsDlg::SettingsDlg(EditionType edition, QWidget* parent) :
 
     for (int i(1); i <= numScreens; ++i)
 	{
-        QRect res = QGuiApplication::screens().at(i - 1)->availableGeometry();
+        QRect res = QGuiApplication::screens().at(i - 1)->geometry();
 
 		ui->comboBox_screen->addItem(
 			QString("%1 (%2x%3)").arg(
